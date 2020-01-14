@@ -1,47 +1,136 @@
 <!DOCTYPE html>
-<!-- saved from url=(0014)about:internet -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Map Track Tutorial - Leaflet</title>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Toni's GPX Editor</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="shortcut icon" type="image/x-icon" href="https://peter-thomson.com/leaflet-map-tutorial/docs/images/favicon.ico">
-    <script src="./Map Track Tutorial - Leaflet_files/jquery-1.12.4.js"></script>
-    <script src="./Map Track Tutorial - Leaflet_files/jquery-ui.js"></script>
-
-    <link rel="stylesheet" href="./Map Track Tutorial - Leaflet_files/leaflet.css">
-    <script src="./Map Track Tutorial - Leaflet_files/leaflet.js"></script>
-
-
-
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-        }
-        #map {
-            width: 100%;
-            height: 1080px;
-        }
-    </style>
+    <link rel="stylesheet" href="./leaflet_files/leaflet.css">
+    <link rel="stylesheet" href="./leaflet_files/style.css">
 
 </head>
 
 <body>
-    <h2>Right click on map to mark your track</h2>
-    <p>Drag a marker to move or delete or insert new marker. Icon top right corner of map changes map type</p>
+    <div class="wrapper">
 
-    <div id="map" class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0" style="position: relative;"><div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"><div class="leaflet-pane leaflet-tile-pane"><div class="leaflet-layer " style="z-index: 1; opacity: 1;"><div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 19; transform: translate3d(0px, 0px, 0px) scale(1);"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/42.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(353px, 262px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/43.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(353px, 518px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/42(1).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(97px, 262px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/42(2).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(609px, 262px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/43(1).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(97px, 518px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/43(2).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(609px, 518px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/41.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(353px, 6px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/44.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(353px, 774px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/41(1).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(97px, 6px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/41(2).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(609px, 6px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/44(1).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(97px, 774px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/44(2).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(609px, 774px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/42(3).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(-159px, 262px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/42(4).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(865px, 262px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/43(3).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(-159px, 518px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/43(4).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(865px, 518px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/40.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(353px, -250px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/41(3).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(-159px, 6px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/41(4).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(865px, 6px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/44(3).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(-159px, 774px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/44(4).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(865px, 774px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/45.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(353px, 1030px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/40(1).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(97px, -250px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/40(2).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(609px, -250px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/45(1).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(97px, 1030px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/45(2).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(609px, 1030px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/40(3).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(-159px, -250px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/40(4).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(865px, -250px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/45(3).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(-159px, 1030px, 0px); opacity: 1;"><img alt="" role="presentation" src="./Map Track Tutorial - Leaflet_files/45(4).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(865px, 1030px, 0px); opacity: 1;"></div></div></div><div class="leaflet-pane leaflet-shadow-pane"></div><div class="leaflet-pane leaflet-overlay-pane"><svg pointer-events="none" class="leaflet-zoom-animated" width="1256" height="1296" viewBox="-105 -108 1256 1296" style="transform: translate3d(-105px, -108px, 0px);"><g><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M0 0"></path></g></svg></div><div class="leaflet-pane leaflet-marker-pane"></div><div class="leaflet-pane leaflet-tooltip-pane"></div><div class="leaflet-pane leaflet-popup-pane"></div><div class="leaflet-proxy leaflet-zoom-animated"></div></div><div class="leaflet-control-container"><div class="leaflet-top leaflet-left"><div class="leaflet-control-zoom leaflet-bar leaflet-control"><a class="leaflet-control-zoom-in" href="https://peter-thomson.com/leaflet-map-tutorial/map-track-editor4.html#" title="Zoom in" role="button" aria-label="Zoom in">+</a><a class="leaflet-control-zoom-out" href="https://peter-thomson.com/leaflet-map-tutorial/map-track-editor4.html#" title="Zoom out" role="button" aria-label="Zoom out">−</a></div></div><div class="leaflet-top leaflet-right"><div class="leaflet-control-layers leaflet-control" aria-haspopup="true"><a class="leaflet-control-layers-toggle" href="https://peter-thomson.com/leaflet-map-tutorial/map-track-editor4.html#" title="Layers"></a><form class="leaflet-control-layers-list"><div class="leaflet-control-layers-base"><label><div><input type="radio" class="leaflet-control-layers-selector" name="leaflet-base-layers" checked="checked"><span> outdoors</span></div></label><label><div><input type="radio" class="leaflet-control-layers-selector" name="leaflet-base-layers"><span> satellite</span></div></label><label><div><input type="radio" class="leaflet-control-layers-selector" name="leaflet-base-layers"><span> hikebike</span></div></label><label><div><input type="radio" class="leaflet-control-layers-selector" name="leaflet-base-layers"><span> OpenStreetMap_France</span></div></label></div><div class="leaflet-control-layers-separator" style="display: none;"></div><div class="leaflet-control-layers-overlays"></div></form></div></div><div class="leaflet-bottom leaflet-left"></div><div class="leaflet-bottom leaflet-right"><div class="leaflet-control-attribution leaflet-control"><a href="http://leafletjs.com/" title="A JS library for interactive maps">Leaflet</a> | © <a href="http://www.thunderforest.com/">Thunderforest</a>, © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a></div></div></div></div>
+        <h1>Tonis GPX Editor</h1>
+        <p>Drag a marker to move or delete or insert new marker. Icon top right corner of map changes map type</p>
 
-<h2>Results of editing track with leaflet</h2>
-    <textarea rows="4" cols="50" id="track">Edited Track Don't paste here</textarea>
-    <div id="trackdistance"></div> <button onclick="download(gpxtrack, &#39;dowloadtrack.gpx&#39;, &#39;text/csv;encoding:utf-8&#39;)">Download edited GPX Track</button>
-    <button onclick="togglemarkers()">Toggle Markers</button><input type="color" id="trackc" name="trackc" value="#f6b73c">
+        <div class="edit">
             <h2>Paste existing gpx track xml text into box below to edit</h2>
-             <textarea rows="20" cols="150" id="gpxtrack"></textarea>
-             <button onclick="editgpx()">Edit pasted GPX</button>
-    <script src="./Map Track Tutorial - Leaflet_files/map-track-editor5.js"></script>
+            <textarea rows="20" cols="150" id="gpxtrack"></textarea>
+            <button onclick="editgpx()">Show and Edit pasted GPX</button>
+        </div>
+
+        <div class="results">
+            <h2>Results of editing track with leaflet</h2>
+            <textarea rows="4" cols="50" id="track">Edited Track Don't paste here</textarea>
+            <div id="trackdistance"></div> 
+            <button onclick="download(gpxtrack, &#39;dowloadtrack.gpx&#39;, &#39;text/csv;encoding:utf-8&#39;)">Download edited GPX Track</button>
+            <button onclick="togglemarkers()">Toggle Markers</button>
+            <input type="color" id="trackc" name="trackc" value="#f6b73c">
+        </div>
+
+<!--     <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+      <p>Drag one or more files to this Drop Zone ...</p>
+  </div> -->
+
+  <div id="map" class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0" style="position: relative;">
+    <div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);">
+        <div class="leaflet-pane leaflet-tile-pane">
+            <div class="leaflet-layer " style="z-index: 1; opacity: 1;">
+                <div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 19; transform: translate3d(0px, 0px, 0px) scale(1);"></div>
+            </div>
+        </div>
+        <div class="leaflet-pane leaflet-shadow-pane">
+        </div>
+        <div class="leaflet-pane leaflet-overlay-pane">
+            <svg pointer-events="none" class="leaflet-zoom-animated" width="1256" height="1296" viewBox="-105 -108 1256 1296" style="transform: translate3d(-105px, -108px, 0px);">
+                <g>
+                    <path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M0 0">
+                    </path>
+                </g>
+            </svg>
+        </div>
+        <div class="leaflet-pane leaflet-marker-pane">
+        </div>
+        <div class="leaflet-pane leaflet-tooltip-pane">
+        </div>
+        <div class="leaflet-pane leaflet-popup-pane">
+        </div>
+        <div class="leaflet-proxy leaflet-zoom-animated">
+        </div>
+    </div>
+    <div class="leaflet-control-container">
+        <div class="leaflet-top leaflet-left">
+            <div class="leaflet-control-zoom leaflet-bar leaflet-control">
+                <a class="leaflet-control-zoom-in" href="https://peter-thomson.com/leaflet-map-tutorial/map-track-editor4.html#" title="Zoom in" role="button" aria-label="Zoom in">+</a>
+                <a class="leaflet-control-zoom-out" href="https://peter-thomson.com/leaflet-map-tutorial/map-track-editor4.html#" title="Zoom out" role="button" aria-label="Zoom out">−</a>
+            </div>
+        </div>
+        <div class="leaflet-top leaflet-right">
+            <div class="leaflet-control-layers leaflet-control" aria-haspopup="true">
+                <a class="leaflet-control-layers-toggle" href="https://peter-thomson.com/leaflet-map-tutorial/map-track-editor4.html#" title="Layers">
+                </a>
+                <form class="leaflet-control-layers-list">
+                    <div class="leaflet-control-layers-base">
+                        <label>
+                            <div>
+                                <input type="radio" class="leaflet-control-layers-selector" name="leaflet-base-layers" checked="checked">
+                                <span> outdoors</span>
+                            </div>
+                        </label>
+                        <label>
+                            <div>
+                                <input type="radio" class="leaflet-control-layers-selector" name="leaflet-base-layers">
+                                <span> satellite</span>
+                            </div>
+                        </label>
+                        <label>
+                            <div>
+                                <input type="radio" class="leaflet-control-layers-selector" name="leaflet-base-layers">
+                                <span> hikebike</span>
+                            </div>
+                        </label>
+                        <label>
+                            <div>
+                                <input type="radio" class="leaflet-control-layers-selector" name="leaflet-base-layers">
+                                <span> OpenStreetMap_France</span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="leaflet-control-layers-separator" style="display: none;">
+                    </div>
+                    <div class="leaflet-control-layers-overlays">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="leaflet-bottom leaflet-left">
+        </div>
+        <div class="leaflet-bottom leaflet-right">
+            <div class="leaflet-control-attribution leaflet-control">
+                <a href="http://leafletjs.com/" title="A JS library for interactive maps">Leaflet</a> | © <a href="http://www.thunderforest.com/">Thunderforest</a>, © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
 
 
+<script src="./leaflet_files/jquery-1.12.4.js"></script>
+<script src="./leaflet_files/jquery-ui.js"></script> 
+<script src="./leaflet_files/leaflet.js"></script>
+<script src="./leaflet_files/map-track-editor5.js"></script>
+<script src="./leaflet_files/ui-stuff.js"></script>
 
-</body></html>
+<script type="text/javascript">
+
+</script>
+
+</body>
+</html>

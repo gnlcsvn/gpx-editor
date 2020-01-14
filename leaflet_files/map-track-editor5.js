@@ -23,13 +23,13 @@ var OpenStreetMap_France = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/
 	maxZoom: 20,
 	attribution: '&copy; Openstreetmap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
-var mylat= '50.58007';
-var mylong = '-3.75578';
+var mylat= '53.073635';
+var mylong = '8.806422';
 
 
 var map = L.map('map', {
-    center: [50.58007, -3.75578],
-    zoom: 7,
+    center: [53.073635, 8.806422],
+    zoom: 13,
     layers: [outdoors],
     zoomControl: true
 });
@@ -45,6 +45,10 @@ var baseLayers = {
 var polyline = L.polyline([]).addTo(map);
 L.control.layers(baseLayers).addTo(map);
 var markerGroup = L.layerGroup().addTo(map);
+
+function editgpxFromDrop(file){
+    //TODO Read GPX file into string that can be used by editgpx()
+   } 
 
 function editgpx(){
 var parser, xmlDoc;
@@ -81,24 +85,24 @@ xmlDoc = parser.parseFromString(gpxString,"text/xml");
 	redrawmarkers();
    } 
 
-function onMapClick(e) {
-    var newMarker = new L.marker(e.latlng, {
-        draggable: 'true',
-    }).addTo(markerGroup);
+// function onMapClick(e) {
+//     var newMarker = new L.marker(e.latlng, {
+//         draggable: 'true',
+//     }).addTo(markerGroup);
 
-    console.log(newMarker._leaflet_id);
-    newMarker
-        .on('dragstart', dragStartHandler)
-        .on('click', dragStartHandler)
-        .on('drag', dragHandler)
-        .on('dragend', dragEndHandler);
-    polyline.addLatLng(L.latLng(e.latlng));
-    map.setView((e.latlng));
-    displaylatlong();
+//     console.log(newMarker._leaflet_id);
+//     newMarker
+//         .on('dragstart', dragStartHandler)
+//         .on('click', dragStartHandler)
+//         .on('drag', dragHandler)
+//         .on('dragend', dragEndHandler);
+//     polyline.addLatLng(L.latLng(e.latlng));
+//     map.setView((e.latlng));
+//     displaylatlong();
 
-}
+// }
 
-map.on('contextmenu', onMapClick);
+// map.on('contextmenu', onMapClick);
 
 function dragStartHandler(e) {
     // Get the polyline's latlngs
@@ -146,6 +150,8 @@ function dragEndHandler(e) {
     delete this.polylineLatlng;
     displaylatlong();
 }
+
+
 
 function deletepoint(mypoint, myid) {
     console.log('in deletepoint' + mypoint + '  ' + myid)
