@@ -20,6 +20,7 @@ h1 {
   background: -webkit-linear-gradient(0deg, rgba(255,92,92,1) 0%, rgba(252,168,48,1) 2%, rgba(247,255,41,1) 5%, rgba(50,255,149,1) 8%, rgba(80,207,255,1) 11%, rgba(40,59,255,1) 14%, rgba(255,0,185,1) 17%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin: 0;
 }
 
 h2 {
