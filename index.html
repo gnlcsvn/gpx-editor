@@ -16,14 +16,18 @@
 <body>
     <div class="wrapper">
 
-        <h1>Tonis GPX Editor <img src="spinningearth.gif"></h1>
+        <h1>Toni's GPX Editor <img src="spinningearth.gif"></h1>
         
         <p>Drag a marker to move or delete or insert new marker. Icon top right corner of map changes map type</p>
 
         <div class="edit">
             <h2>Paste existing gpx track xml text into box below to edit</h2>
-            <textarea rows="20" cols="150" id="gpxtrack"></textarea>
+            <textarea rows="20" cols="150" id="gpxtrack" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);"></textarea>
             <button onclick="editgpx()">Show and Edit pasted GPX</button>
+
+<!--                 <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+      <p>Drag one or more files to this Drop Zone ...</p>
+  </div> -->
         </div>
 
         <div class="results">
@@ -35,9 +39,7 @@
             <input type="color" id="trackc" name="trackc" value="#f6b73c">
         </div>
 
-<!--     <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
-      <p>Drag one or more files to this Drop Zone ...</p>
-  </div> -->
+
 
   <div id="map" class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0" style="position: relative;">
     <div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);">

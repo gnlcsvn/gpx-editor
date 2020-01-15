@@ -47,43 +47,86 @@ L.control.layers(baseLayers).addTo(map);
 var markerGroup = L.layerGroup().addTo(map);
 
 function editgpxFromDrop(file){
-    //TODO Read GPX file into string that can be used by editgpx()
-   } 
+    reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function(e) {
+    // e.target.result should contain the text
+    //console.log(reader.result);
 
-function editgpx(){
-var parser, xmlDoc;
-gpxString= document.getElementById("gpxtrack").value;
-parser = new DOMParser();
-xmlDoc = parser.parseFromString(gpxString,"text/xml");
- txt = "";
+    gpxString = reader.result;
+
+    //put the text in the text field  from the file
+    document.getElementById("gpxtrack").value = gpxString;
+
+    parser = new DOMParser();
+    xmlDoc = parser.parseFromString(gpxString,"text/xml");
+    txt = "";
     x = xmlDoc.getElementsByTagName('trkpt');
-     var inc = Math.ceil(x.length/200);
+    var inc = Math.ceil(x.length/200);
     console.log('no of markers' + x.length +"  inc = "+inc);
-   
+    
     for (i = 0; i < x.length; i=i+ inc) { 
         lat= x[i].getAttribute('lat');
         lon= x[i].getAttribute('lon');
         var latlng = L.latLng(lat, lon);
         var newMarker = new L.marker(latlng, {
-        draggable: 'true',
-		}).addTo(markerGroup);
+            draggable: 'true',
+        }).addTo(markerGroup);
 
-		console.log(newMarker._leaflet_id);
-		newMarker
-			.on('dragstart', dragStartHandler)
-			.on('click', dragStartHandler)
-			.on('drag', dragHandler)
-			.on('dragend', dragEndHandler);
-		polyline.addLatLng(latlng);
-		
-		
+        console.log(newMarker._leaflet_id);
+        newMarker
+        .on('dragstart', dragStartHandler)
+        .on('click', dragStartHandler)
+        .on('drag', dragHandler)
+        .on('dragend', dragEndHandler);
+        polyline.addLatLng(latlng);
+        
+        
 
-		}
+    }
     map.setView((latlng));
     displaylatlong();
     map.fitBounds(polyline.getBounds());
-	redrawmarkers();
-   } 
+    redrawmarkers();
+
+};
+
+} 
+
+function editgpx(){
+    var parser, xmlDoc;
+    gpxString= document.getElementById("gpxtrack").value;
+    parser = new DOMParser();
+    xmlDoc = parser.parseFromString(gpxString,"text/xml");
+    txt = "";
+    x = xmlDoc.getElementsByTagName('trkpt');
+    var inc = Math.ceil(x.length/200);
+    console.log('no of markers' + x.length +"  inc = "+inc);
+
+    for (i = 0; i < x.length; i=i+ inc) { 
+        lat= x[i].getAttribute('lat');
+        lon= x[i].getAttribute('lon');
+        var latlng = L.latLng(lat, lon);
+        var newMarker = new L.marker(latlng, {
+            draggable: 'true',
+        }).addTo(markerGroup);
+
+        console.log(newMarker._leaflet_id);
+        newMarker
+        .on('dragstart', dragStartHandler)
+        .on('click', dragStartHandler)
+        .on('drag', dragHandler)
+        .on('dragend', dragEndHandler);
+        polyline.addLatLng(latlng);
+
+
+
+    }
+    map.setView((latlng));
+    displaylatlong();
+    map.fitBounds(polyline.getBounds());
+    redrawmarkers();
+} 
 
 // function onMapClick(e) {
 //     var newMarker = new L.marker(e.latlng, {
@@ -168,65 +211,65 @@ function deletepoint(mypoint, myid) {
 function insertpoint(mypoint, myid) {
     console.log('in insertpoint' + mypoint + '  ' + myid)
         //markerGroup.removeLayer(myid);
-    var latlngs = polyline.getLatLngs();
-    latlngs.splice(mypoint, 0, newpoint);
-    var newMarker = new L.marker(newpoint, {
-        draggable: 'true'
-    }).addTo(markerGroup);
-    console.log(newMarker._leaflet_id);
-    newMarker
+        var latlngs = polyline.getLatLngs();
+        latlngs.splice(mypoint, 0, newpoint);
+        var newMarker = new L.marker(newpoint, {
+            draggable: 'true'
+        }).addTo(markerGroup);
+        console.log(newMarker._leaflet_id);
+        newMarker
         .on('dragstart', dragStartHandler)
         .on('click', dragStartHandler)
         .on('drag', dragHandler)
         .on('dragend', dragEndHandler);
-    polyline.setLatLngs(latlngs);
-    displaylatlong();
-    map.closePopup();
-}
+        polyline.setLatLngs(latlngs);
+        displaylatlong();
+        map.closePopup();
+    }
 
-function togglemarkers() {
-	if (showmarkers == true ){ showmarkers = false;}
-	else { showmarkers = true;}
-	redrawmarkers();
-}
+    function togglemarkers() {
+       if (showmarkers == true ){ showmarkers = false;}
+       else { showmarkers = true;}
+       redrawmarkers();
+   }
 
-function redrawmarkers() {
-	var trackc = document.getElementById('trackc').value
-    markerGroup.clearLayers();
-    polyline.setStyle({
-    color: trackc
-	});
+   function redrawmarkers() {
+       var trackc = document.getElementById('trackc').value
+       markerGroup.clearLayers();
+       polyline.setStyle({
+        color: trackc
+    });
 
     // Get the polyline's latlngs
     var latlngs = polyline.getLatLngs();
-	if (showmarkers == true ){
+    if (showmarkers == true ){
     // Iterate the polyline's latlngs
-		for (var i = 0; i < latlngs.length; i++) {
+    for (var i = 0; i < latlngs.length; i++) {
 
-			var newMarker = new L.marker(latlngs[i], {
-				draggable: 'true'
-				}).addTo(markerGroup);
+     var newMarker = new L.marker(latlngs[i], {
+        draggable: 'true'
+    }).addTo(markerGroup);
 
-			console.log(newMarker._leaflet_id + showmarkers);
-			newMarker
-				.on('dragstart', dragStartHandler)
-				.on('click', dragStartHandler)
-				.on('drag', dragHandler)
-				.on('dragend', dragEndHandler);
-		}
-    }
+     console.log(newMarker._leaflet_id + showmarkers);
+     newMarker
+     .on('dragstart', dragStartHandler)
+     .on('click', dragStartHandler)
+     .on('drag', dragHandler)
+     .on('dragend', dragEndHandler);
+ }
+}
 }
 
 function displaylatlong() {
-        var div = document.getElementById('track');
-        var trackd = document.getElementById('trackdistance');
-        var timestamp = new Date().toLocaleString('en-GB');
+    var div = document.getElementById('track');
+    var trackd = document.getElementById('trackdistance');
+    var timestamp = new Date().toLocaleString('en-GB');
 
-        gpxtrack = '<?xml version="1.0" encoding="UTF-8" standalone="no" ?>\n<gpx xmlns="http://www.topografix.com/GPX/1/1"  creator="peter-thomson.com" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">\n<trk><name>' + timestamp + '</name>\n<trkseg>\n';
-        div.innerHTML = gpxtrack;
-        var latlngs = polyline.getLatLngs();
-        trkdistance = 0;
-        var lastpoint = latlngs[0];
+    gpxtrack = '<?xml version="1.0" encoding="UTF-8" standalone="no" ?>\n<gpx xmlns="http://www.topografix.com/GPX/1/1"  creator="peter-thomson.com" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">\n<trk><name>' + timestamp + '</name>\n<trkseg>\n';
+    div.innerHTML = gpxtrack;
+    var latlngs = polyline.getLatLngs();
+    trkdistance = 0;
+    var lastpoint = latlngs[0];
         // Iterate the polyline's latlngs
         for (var i = 0; i < latlngs.length; i++) {
             trkdistance += latlngs[i].distanceTo(lastpoint);
@@ -245,9 +288,9 @@ function displaylatlong() {
     
     
     //https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
-var download = function (content, fileName, mimeType) {
-    var a = document.createElement('a');
-    mimeType = mimeType || 'application/octet-stream';
+    var download = function (content, fileName, mimeType) {
+        var a = document.createElement('a');
+        mimeType = mimeType || 'application/octet-stream';
 
     if (navigator.msSaveBlob) { // IE10
         navigator.msSaveBlob(new Blob([content], {
