@@ -23,7 +23,8 @@
         <div class="edit">
             <h2>Paste or drop existing gpx track into box below to edit</h2>
             <textarea rows="20" cols="150" id="gpxtrack" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);"></textarea>
-            <button onclick="editgpx()">Show and Edit pasted GPX</button>
+            <input type="file" id="myFile">
+            <button onclick="editgpxFromFileUpload()">Show and Edit pasted GPX</button>
 
 <!--                 <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
       <p>Drag one or more files to this Drop Zone ...</p>
@@ -34,6 +35,7 @@
             <h2>Results of editing track with leaflet</h2>
             <textarea rows="4" cols="50" id="track">Edited Track Don't paste here</textarea>
             <div id="trackdistance"></div> 
+            <div id="trackbearing"></div> 
             <button onclick="download(gpxtrack, &#39;dowloadtrack.gpx&#39;, &#39;text/csv;encoding:utf-8&#39;)">Download edited GPX Track</button>
             <button onclick="togglemarkers()">Toggle Markers</button>
             <input type="color" id="trackc" name="trackc" value="#f6b73c">

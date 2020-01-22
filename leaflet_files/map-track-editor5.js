@@ -46,6 +46,57 @@ var polyline = L.polyline([]).addTo(map);
 L.control.layers(baseLayers).addTo(map);
 var markerGroup = L.layerGroup().addTo(map);
 
+function editgpxFromFileUpload(file){
+
+    var file = document.getElementById("myFile").files[0];
+
+    reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function(e) {
+    // e.target.result should contain the text
+    //console.log(reader.result);
+
+    gpxString = reader.result;
+
+    //put the text in the text field  from the file
+    document.getElementById("gpxtrack").value = gpxString;
+
+    parser = new DOMParser();
+    xmlDoc = parser.parseFromString(gpxString,"text/xml");
+    txt = "";
+    x = xmlDoc.getElementsByTagName('trkpt');
+    var inc = Math.ceil(x.length/200);
+    console.log('no of markers' + x.length +"  inc = "+inc);
+    
+    for (i = 0; i < x.length; i=i+ inc) { 
+        lat= x[i].getAttribute('lat');
+        lon= x[i].getAttribute('lon');
+        var latlng = L.latLng(lat, lon);
+        var newMarker = new L.marker(latlng, {
+            draggable: 'true',
+        }).addTo(markerGroup);
+
+        console.log(newMarker._leaflet_id);
+        newMarker
+        .on('dragstart', dragStartHandler)
+        .on('click', dragStartHandler)
+        .on('drag', dragHandler)
+        .on('dragend', dragEndHandler);
+        polyline.addLatLng(latlng);
+        
+        
+
+    }
+    map.setView((latlng));
+    displaylatlong();
+    displaybearing();
+    map.fitBounds(polyline.getBounds());
+    redrawmarkers();
+
+};
+
+}  
+
 function editgpxFromDrop(file){
     reader = new FileReader();
     reader.readAsText(file);
@@ -86,6 +137,7 @@ function editgpxFromDrop(file){
     }
     map.setView((latlng));
     displaylatlong();
+    displaybearing();
     map.fitBounds(polyline.getBounds());
     redrawmarkers();
 
@@ -124,6 +176,7 @@ function editgpx(){
     }
     map.setView((latlng));
     displaylatlong();
+    displaybearing();
     map.fitBounds(polyline.getBounds());
     redrawmarkers();
 } 
@@ -192,6 +245,7 @@ function dragEndHandler(e) {
     // Delete key from marker instance
     delete this.polylineLatlng;
     displaylatlong();
+    displaybearing();
 }
 
 
@@ -203,6 +257,7 @@ function deletepoint(mypoint, myid) {
     latlngs.splice(mypoint, 1);
     polyline.setLatLngs(latlngs);
     displaylatlong();
+    displaybearing();
     map.closePopup();
     redrawmarkers();
 
@@ -224,19 +279,20 @@ function insertpoint(mypoint, myid) {
         .on('dragend', dragEndHandler);
         polyline.setLatLngs(latlngs);
         displaylatlong();
+        displaybearing();
         map.closePopup();
     }
 
     function togglemarkers() {
-       if (showmarkers == true ){ showmarkers = false;}
-       else { showmarkers = true;}
-       redrawmarkers();
-   }
+     if (showmarkers == true ){ showmarkers = false;}
+     else { showmarkers = true;}
+     redrawmarkers();
+ }
 
-   function redrawmarkers() {
-       var trackc = document.getElementById('trackc').value
-       markerGroup.clearLayers();
-       polyline.setStyle({
+ function redrawmarkers() {
+     var trackc = document.getElementById('trackc').value
+     markerGroup.clearLayers();
+     polyline.setStyle({
         color: trackc
     });
 
@@ -246,17 +302,17 @@ function insertpoint(mypoint, myid) {
     // Iterate the polyline's latlngs
     for (var i = 0; i < latlngs.length; i++) {
 
-     var newMarker = new L.marker(latlngs[i], {
+       var newMarker = new L.marker(latlngs[i], {
         draggable: 'true'
     }).addTo(markerGroup);
 
-     console.log(newMarker._leaflet_id + showmarkers);
-     newMarker
-     .on('dragstart', dragStartHandler)
-     .on('click', dragStartHandler)
-     .on('drag', dragHandler)
-     .on('dragend', dragEndHandler);
- }
+       console.log(newMarker._leaflet_id + showmarkers);
+       newMarker
+       .on('dragstart', dragStartHandler)
+       .on('click', dragStartHandler)
+       .on('drag', dragHandler)
+       .on('dragend', dragEndHandler);
+   }
 }
 }
 
@@ -285,8 +341,52 @@ function displaylatlong() {
         miles = trkdistance * 0.6213712;
         trackd.innerHTML = 'distance = ' + trkdistance.toFixed(3).toString() + 'km  distance = ' + miles.toFixed(3).toString() + ' miles (note distance is horizontal)';
     }
-    
-    
+
+function displaybearing() {
+        var trackb = document.getElementById('trackbearing');
+        var latlngs = polyline.getLatLngs();
+        trackbearing = 0;
+
+    //calculate bearing
+
+    var  start = latlngs[0];
+    var destination = latlngs[latlngs.length-1];
+
+    startLat = start['lat'].toString();
+    startLng = start['lng'].toString();
+
+    destLat = destination['lat'].toString();
+    destLng = destination['lng'].toString();
+
+    trackb.innerHTML = 'bearing from destination to start = ' + bearing(destLat, destLng, startLat, startLng).toFixed(0).toString() + '°';
+}
+
+    // Converts from degrees to radians.
+function toRadians(degrees) {
+        return degrees * Math.PI / 180;
+    }
+
+    // Converts from radians to degrees.
+function toDegrees(radians) {
+        return radians * 180 / Math.PI;
+    }
+
+
+function bearing(startLat, startLng, destLat, destLng){
+      startLat = toRadians(startLat);
+      startLng = toRadians(startLng);
+      destLat = toRadians(destLat);
+      destLng = toRadians(destLng);
+
+      y = Math.sin(destLng - startLng) * Math.cos(destLat);
+      x = Math.cos(startLat) * Math.sin(destLat) -
+      Math.sin(startLat) * Math.cos(destLat) * Math.cos(destLng - startLng);
+      brng = Math.atan2(y, x);
+      brng = toDegrees(brng);
+      return (brng + 360) % 360;
+    }
+
+
     //https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
     var download = function (content, fileName, mimeType) {
         var a = document.createElement('a');
