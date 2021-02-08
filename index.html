@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Toni's GPX Editor</title>
+    <title>GPX Editor</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -16,12 +16,12 @@
 <body>
     <div class="wrapper">
 
-        <h1>Toni's GPX Editor <img src="spinningearth.gif"></h1>
+        <h1>GPX Editor <img src="spinningearth.gif"></h1>
         
-        <p>Drag a marker to move or delete or insert new marker. Icon top right corner of map changes map type</p>
+        <p>Drag a marker to move, delete it or to insert a new marker. The icon top right corner of map changes the map type</p>
 
         <div class="edit">
-            <h2>Paste or drop existing gpx track into box below to edit</h2>
+            <h2>Paste the text of a gpx file or drop the file into box below to edit</h2>
             <textarea rows="20" cols="150" id="gpxtrack" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);"></textarea>
             <input type="file" id="myFile">
             <button onclick="editgpxFromFileUpload()">Show and Edit pasted GPX</button>
@@ -32,7 +32,7 @@
         </div>
 
         <div class="results">
-            <h2>Results of editing track with leaflet</h2>
+            <h2>Results of editing the track with leaflet</h2>
             <textarea rows="4" cols="50" id="track">Edited Track Don't paste here</textarea>
             <div id="trackdistance"></div> 
             <div id="trackbearing"></div> 
