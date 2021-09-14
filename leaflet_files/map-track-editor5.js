@@ -30,14 +30,13 @@ var mylong = '8.806422';
 var map = L.map('map', {
     center: [53.073635, 8.806422],
     zoom: 13,
-    layers: [outdoors],
+    layers: [hikebike],
     zoomControl: true
 });
 
 var baseLayers = {
-    "outdoors": outdoors,
-    "satellite": satellite,
     "hikebike": hikebike,
+    "satellite": satellite,
     "OpenStreetMap_France":OpenStreetMap_France
 };
 
